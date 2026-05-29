@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── base ── */
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: #f1f5f9;
+  color: #0f172a;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Dark mode body — works with both .dark on <html> (Tailwind v3 & v4) */
+:root.dark body,
+html.dark body {
+  background-color: #0d1117;
+  color: #f1f5f9;
+}
+
+/* ── card ── */
+.card {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+  border: 1px solid #e2e8f0;
+  padding: 1.5rem;
+}
+:root.dark .card,
+html.dark .card {
+  background-color: #161b22;
+  border-color: rgb(51 65 85 / 0.6);
+  box-shadow: none;
+}
+
+/* ── buttons ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .625rem 1rem;
+  background-color: #059669; color: white;
+  font-weight: 600; border-radius: .75rem; font-size: .875rem;
+  transition: background-color .2s; border: none; cursor: pointer;
+}
+.btn-primary:hover   { background-color: #047857; }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .625rem 1rem;
+  background-color: #f1f5f9; color: #334155;
+  font-weight: 600; border-radius: .75rem; font-size: .875rem;
+  transition: background-color .2s; border: none; cursor: pointer;
+}
+.btn-secondary:hover { background-color: #e2e8f0; }
+:root.dark .btn-secondary,
+html.dark .btn-secondary  { background-color: #334155; color: #cbd5e1; }
+:root.dark .btn-secondary:hover,
+html.dark .btn-secondary:hover { background-color: #475569; }
+
+/* ── input ── */
+.input-field {
+  width: 100%; padding: .625rem 1rem;
+  background-color: #f8fafc; border: 1px solid #e2e8f0;
+  border-radius: .75rem; font-size: .875rem; color: #0f172a;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.input-field:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgb(16 185 129 / .2);
+}
+:root.dark .input-field,
+html.dark .input-field {
+  background-color: rgb(51 65 85 / .5);
+  border-color: #475569; color: #f1f5f9;
+}
+
+/* ── badges ── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: .125rem .625rem; border-radius: 9999px;
+  font-size: .75rem; font-weight: 600;
+}
+.badge-success { background-color: #d1fae5; color: #065f46; }
+.badge-info    { background-color: #e0f2fe; color: #075985; }
+.badge-warning { background-color: #fef3c7; color: #92400e; }
+.badge-danger  { background-color: #fee2e2; color: #991b1b; }
+.badge-purple  { background-color: #ede9fe; color: #5b21b6; }
+
+/* ── modal ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background-color: rgb(0 0 0 / .6);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 50; padding: 1rem;
+}
+.modal-content {
+  background-color: white; border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / .25);
+  max-height: 90vh; overflow-y: auto; width: 100%;
+}
+:root.dark .modal-content,
+html.dark .modal-content { background-color: #161b22; }
+:root.dark .modal-overlay,
+html.dark .modal-overlay  { background-color: rgb(15 23 42 / .7); }
