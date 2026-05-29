@@ -16,7 +16,7 @@ const schema = z.object({
   hora:           z.string().min(1, 'Hora obrigatória'),
   tipo_servico:   z.string().min(1, 'Tipo de serviço obrigatório'),
   veterinario_id: z.string().optional(),
-  status:         z.enum(['agendado', 'confirmado', 'concluido', 'cancelado']).default('agendado'),
+  status: z.enum(['agendado', 'confirmado', 'concluido', 'cancelado']),
   observacoes:    z.string().optional(),
 })
 type FormData = z.infer<typeof schema>
@@ -45,9 +45,10 @@ export default function AgendamentosPage() {
   const [editing,   setEditing]   = useState<Agendamento | null>(null)
   const supabase = createClient()
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  })
+const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
+  resolver: zodResolver(schema),
+  defaultValues: { status: 'agendado' },  // ← adicionar aqui
+})
 
   useEffect(() => { load(); loadPets(); loadVets() }, [])
 
@@ -79,7 +80,7 @@ export default function AgendamentosPage() {
       .eq('role', 'veterinario')
       .eq('ativo', true)
       .order('nome')
-    setVets(data ?? [])
+      setVets((data ?? []) as Usuario[])
   }
 
   const onSubmit = async (data: FormData) => {
