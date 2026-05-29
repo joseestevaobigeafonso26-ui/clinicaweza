@@ -28,7 +28,7 @@ const metodoLabel: Record<string, string> = {
 
 export default function PagamentosPage() {
   const [pagamentos, setPagamentos]   = useState<Pagamento[]>([])
-  const [clientes,   setClientes]     = useState<Cliente[]>([])
+  const [clientes, setClientes] = useState<Pick<Cliente, 'id' | 'nome' | 'telefone'>[]>([])
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([])
   const [showModal,  setShowModal]    = useState(false)
   const [editing,    setEditing]      = useState<Pagamento | null>(null)
@@ -52,13 +52,13 @@ export default function PagamentosPage() {
   }
 
   const loadAgendamentos = async () => {
-    const { data } = await supabase
-      .from('agendamentos')
-      .select('id, tipo_servico, data, pets(nome)')
-      .in('status', ['confirmado', 'concluido'])
-      .order('data', { ascending: false })
-    setAgendamentos(data ?? [])
-  }
+  const { data } = await supabase
+    .from('agendamentos')
+    .select('*')  // Get all fields
+    .in('status', ['confirmado', 'concluido'])
+    .order('data', { ascending: false })
+  setAgendamentos(data ?? [])
+}
 
   const onSubmit = async (data: any) => {
     try {

@@ -136,7 +136,7 @@ export default function PetsPage() {
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-2">
                   <p className="text-slate-400">Idade</p>
-                  <p className="font-semibold text-slate-700 dark:text-slate-300">{calcAge(p.data_nascimento)}</p>
+                   p.data_nascimento ? calcAge(p.data_nascimento) : '—'               
                 </div>
                 {p.peso && <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-2">
                   <p className="text-slate-400">Peso</p>

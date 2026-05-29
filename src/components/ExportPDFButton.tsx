@@ -1,5 +1,5 @@
 import { Download } from 'lucide-react'
-import { exportarParaPDF } from '@/lib/export-pdf'
+import { exportarParaPDF } from '@/lib/export_pdf'
 
 interface ExportButtonProps {
   elementId: string
